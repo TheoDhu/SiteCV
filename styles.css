@@ -2,46 +2,85 @@ body {
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;
   color: #333333;
+  margin: 0; /* enlever marges par défaut */
 }
 
+/* ----- HEADER ----- */
 header {
   background-color: #1e00b7;
   color: white;
-  padding: 10px 0;
+  padding: 1rem; /* en rem, mieux que px */
   text-align: center;
 }
 
+/* ----- NAVIGATION ----- */
 nav ul.tabs {
   list-style-type: none;
   padding: 0;
   margin: 0;
   display: flex;
+  flex-wrap: wrap;              /* permet retour à la ligne si pas assez de place */
   justify-content: center;
   background-color: #444;
 }
 
 nav ul.tabs li {
-  margin: 0 5px;
+  margin: 0.3rem;
+  flex: 1 1 auto;              /* chaque onglet prend de la place dispo */
+  text-align: center;
 }
 
 nav ul.tabs li a {
   color: white;
   text-decoration: none;
-  padding: 10px 20px;
+  padding: 0.8rem 1.2rem;
   display: block;
+  border-radius: 5px;
 }
 
 nav ul.tabs li a.active {
   background-color: #007BFF;
 }
 
+/* ----- CONTENU ----- */
 .tab-content {
   display: none;
-  padding: 20px;
+  padding: 1.5rem;
   background-color: white;
-  margin-top: 10px;
+  margin: 1rem auto; /* centré */
+  width: 90%; /* adaptatif */
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .tab-content.active {
   display: block;
+}
+
+/* ----- RESPONSIVE ----- */
+@media (max-width: 768px) {
+  nav ul.tabs li a {
+    padding: 0.6rem;   /* moins d’espace */
+    font-size: 0.9rem; /* texte réduit */
+  }
+
+  .tab-content {
+    padding: 1rem;
+    width: 95%;
+  }
+}
+
+@media (max-width: 480px) {
+  nav ul.tabs {
+    flex-direction: column; /* onglets les uns sous les autres */
+  }
+
+  nav ul.tabs li {
+    width: 100%;
+  }
+
+  nav ul.tabs li a {
+    font-size: 1rem;
+    text-align: center;
+  }
 }
