@@ -84,3 +84,12 @@ nav ul.tabs li a.active {
     text-align: center;
   }
 }
+
+video {
+  width: 100%;       /* prend toute la largeur dispo */
+  max-width: 1280px; /* mais jamais plus grand que la source */
+  height: auto;      /* conserve le ratio */
+  border-radius: 8px; /* optionnel, pour un rendu plus doux */
+  display: block;
+  margin: 1rem auto; /* centré */
+}
