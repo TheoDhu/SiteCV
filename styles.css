@@ -1,37 +1,70 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-  color: #333333;
-  margin: 0; /* enlever marges par défaut */
+/* ---------- VARIABLES DE THÈME ---------- */
+:root {
+  --bg-color: #f0f0f0;
+  --text-color: #333;
+  --header-bg: #1e00b7;
+  --tab-bg: #444;
+  --tab-active: #007BFF;
+  --tab-text: white;
+  --content-bg: white;
+  --btn-bg: #f0f0f0;        /* même que le fond */
+  --btn-text: #333;          /* texte noir */
+  --btn-border: #333;        /* bordure contrastée */
 }
 
-/* ----- HEADER ----- */
+/* ---------- THÈME SOMBRE ---------- */
+body.dark-mode {
+  --bg-color: #121212;
+  --text-color: #eee;
+  --header-bg: #000080;
+  --tab-bg: #222;
+  --tab-active: #0056b3;
+  --tab-text: #eee;
+  --content-bg: #1c1c1c;
+  --btn-bg: #121212;         /* même que fond sombre */
+  --btn-text: #eee;          /* texte clair */
+  --btn-border: #eee;        /* bordure contrastée */
+}
+
+/* ---------- BODY ---------- */
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+}
+
+/* ---------- HEADER ---------- */
 header {
-  background-color: #1e00b7;
-  color: white;
-  padding: 1rem; /* en rem, mieux que px */
+  background-color: var(--header-bg);
+  color: var(--tab-text);
+  padding: 1rem;
   text-align: center;
 }
 
-/* ----- NAVIGATION ----- */
+/* ---------- NAVIGATION ---------- */
 nav ul.tabs {
   list-style-type: none;
   padding: 0;
   margin: 0;
   display: flex;
-  flex-wrap: wrap;              /* permet retour à la ligne si pas assez de place */
+  flex-wrap: wrap;
   justify-content: center;
-  background-color: #444;
+  background-color: var(--tab-bg);
 }
 
 nav ul.tabs li {
   margin: 0.3rem;
-  flex: 1 1 auto;              /* chaque onglet prend de la place dispo */
+  flex: 1 1 auto;
   text-align: center;
 }
 
+nav ul.tabs li:hover {
+  filter: brightness(0.9); /* petit effet au survol */
+}
+
 nav ul.tabs li a {
-  color: white;
+  color: var(--tab-text);
   text-decoration: none;
   padding: 0.8rem 1.2rem;
   display: block;
@@ -39,16 +72,18 @@ nav ul.tabs li a {
 }
 
 nav ul.tabs li a.active {
-  background-color: #007BFF;
+  background-color: var(--tab-active);
+  color: var(--tab-text);
 }
 
-/* ----- CONTENU ----- */
+/* ---------- CONTENU ---------- */
 .tab-content {
   display: none;
   padding: 1.5rem;
-  background-color: white;
-  margin: 1rem auto; /* centré */
-  width: 90%; /* adaptatif */
+  background-color: var(--content-bg);
+  margin: 1rem auto;
+  max-width: 1000px;
+  width: 90%;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
@@ -57,11 +92,22 @@ nav ul.tabs li a.active {
   display: block;
 }
 
-/* ----- RESPONSIVE ----- */
+/* ---------- VIDÉOS ---------- */
+video {
+  width: 100%;
+  max-width: 1280px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  margin: 1rem auto;
+  border-radius: 8px;
+}
+
+/* ---------- RESPONSIVE ---------- */
 @media (max-width: 768px) {
   nav ul.tabs li a {
-    padding: 0.6rem;   /* moins d’espace */
-    font-size: 0.9rem; /* texte réduit */
+    padding: 0.6rem;
+    font-size: 0.9rem;
   }
 
   .tab-content {
@@ -72,7 +118,7 @@ nav ul.tabs li a.active {
 
 @media (max-width: 480px) {
   nav ul.tabs {
-    flex-direction: column; /* onglets les uns sous les autres */
+    flex-direction: column;
   }
 
   nav ul.tabs li {
@@ -85,11 +131,21 @@ nav ul.tabs li a.active {
   }
 }
 
-video {
-  width: 100%;       /* prend toute la largeur dispo */
-  max-width: 1280px; /* mais jamais plus grand que la source */
-  height: auto;      /* conserve le ratio */
-  border-radius: 8px; /* optionnel, pour un rendu plus doux */
-  display: block;
-  margin: 1rem auto; /* centré */
+button {
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border: 2px solid var(--btn-border);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease; /* effet de transition douce */
+}
+
+button:hover {
+  filter: brightness(0.9); /* petit effet au survol */
+}
+
+#contact-mail {
+  display: inline;
 }
