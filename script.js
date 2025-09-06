@@ -25,27 +25,42 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.classList.toggle("dark-mode");
   });
 
+  // --- Langue ---
   let currentLang = navigator.language.startsWith("fr") ? "fr" : "en";
   let texts = {};
 
-  fetch(`lang/${currentLang}.json`)
-    .then(response => response.json())
-    .then(data => {
-      texts = data;
-      setLanguage(currentLang);
-    });
+  // Fonction pour appliquer la langue aux éléments
+  function setLanguage(lang) {
+    for (const id in texts) {
+      const element = document.getElementById(id);
+      if(element) {
+        element.textContent = texts[id];
+      }
+    }
+  }
 
-  // Changement de langue au clic
-  const langToggle = document.getElementById("lang-toggle");
-  langToggle.addEventListener("click", () => {
-    currentLang = currentLang === "fr" ? "en" : "fr";
-    fetch(`lang/${currentLang}.json`)
+  // Charger le JSON correspondant à la langue actuelle
+  function loadLanguage(lang) {
+    fetch(`lang/${lang}.json`)
       .then(response => response.json())
       .then(data => {
         texts = data;
-        setLanguage(currentLang);
-        langToggle.textContent = currentLang.toUpperCase();
-      });
-  });
+        setLanguage(lang);
+        const langToggle = document.getElementById("lang-toggle");
+        if(langToggle) langToggle.textContent = lang.toUpperCase();
+      })
+      .catch(err => console.error(`Erreur chargement langue ${lang}:`, err));
+  }
 
+  // Initialisation
+  loadLanguage(currentLang);
+
+  // Changement de langue au clic
+  const langToggle = document.getElementById("lang-toggle");
+  if(langToggle) {
+    langToggle.addEventListener("click", () => {
+      currentLang = currentLang === "fr" ? "en" : "fr";
+      loadLanguage(currentLang);
+    });
+  }
 });
