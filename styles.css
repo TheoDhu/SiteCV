@@ -131,6 +131,7 @@ video {
 }
 
 button {
+  margin: 0.3rem;
   background-color: var(--btn-bg);
   color: var(--btn-text);
   border: 2px solid var(--btn-border);
